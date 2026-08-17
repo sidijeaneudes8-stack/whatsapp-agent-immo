@@ -1,0 +1,21 @@
+{
+  "typeWebhook": "incomingMessageReceived",
+  "instanceData": {
+    "idInstance": 1101000001,
+    "wid": "22990000000@c.us",
+    "typeInstance": "whatsapp"
+  },
+  "timestamp": 1700000000,
+  "idMessage": "TESTMSG001",
+  "senderData": {
+    "chatId": "2290144220259@c.us",
+    "sender": "2290144220259@c.us",
+    "senderName": "Prospect Demo"
+  },
+  "messageData": {
+    "typeMessage": "textMessage",
+    "textMessageData": {
+      "textMessage": "Bonjour, je cherche un appartement 2 chambres à Cotonou, budget max 150 000 FCFA/mois."
+    }
+  }
+}

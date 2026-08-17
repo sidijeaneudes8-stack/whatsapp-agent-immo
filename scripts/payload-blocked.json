@@ -1,0 +1,21 @@
+{
+  "typeWebhook": "incomingMessageReceived",
+  "instanceData": {
+    "idInstance": 1101000001,
+    "wid": "22990000000@c.us",
+    "typeInstance": "whatsapp"
+  },
+  "timestamp": 1700000001,
+  "idMessage": "TESTMSG002",
+  "senderData": {
+    "chatId": "22997000000@c.us",
+    "sender": "22997000000@c.us",
+    "senderName": "Numéro non autorisé"
+  },
+  "messageData": {
+    "typeMessage": "textMessage",
+    "textMessageData": {
+      "textMessage": "Ce message ne doit recevoir aucune réponse."
+    }
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "name": "whatsapp-agent-immo",
+  "version": "1.0.0",
+  "description": "Agent IA WhatsApp pour agence immobilière (Green API + Groq) - démo Loom",
+  "main": "api/webhook.js",
+  "scripts": {
+    "dev": "vercel dev",
+    "start:local": "node scripts/local-server.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "groq-sdk": "^0.9.1",
+    "node-fetch": "^2.7.0"
+  },
+  "engines": {
+    "node": ">=18.x"
+  }
+}
