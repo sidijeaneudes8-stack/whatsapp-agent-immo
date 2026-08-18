@@ -143,7 +143,41 @@ Dans le dashboard Green API, sur ton instance :
   seuls les 6 derniers échanges par numéro sont gardés, avec une
   expiration de 6h, pour rester léger.
 
-## Personnaliser la personnalité de l'agent
+## 7. Prise de rendez-vous automatique (Google Calendar)
+
+L'agent peut créer un événement dans un Google Calendar dès que le
+prospect confirme une date et une heure précises pour une visite —
+Groq déclenche cette action lui-même (function calling), tu n'as rien
+à faire côté conversation.
+
+### Créer le compte de service Google
+
+1. Va sur [console.cloud.google.com](https://console.cloud.google.com/), crée un projet (ou réutilise un existant).
+2. Active l'**API Google Calendar** (menu "APIs & Services" > "Library" > cherche "Google Calendar API" > Enable).
+3. Va dans "APIs & Services" > "Credentials" > "Create Credentials" > "Service Account". Donne-lui un nom (ex: `whatsapp-immo`), pas besoin de rôle particulier au niveau projet.
+4. Une fois créé, ouvre le compte de service > onglet "Keys" > "Add Key" > "Create new key" > format **JSON**. Un fichier `.json` se télécharge.
+5. Dans ce fichier JSON, note `client_email` et `private_key`.
+
+### Partager ton agenda avec le compte de service
+
+1. Ouvre [calendar.google.com](https://calendar.google.com/), va dans les paramètres du calendrier que tu veux utiliser (ton calendrier principal, ou un calendrier dédié "RDV Agence").
+2. Section "Partager avec des personnes" > ajoute l'adresse `client_email` du compte de service (ex: `whatsapp-immo@ton-projet.iam.gserviceaccount.com`), avec la permission **"Apporter des modifications aux événements"**.
+3. Note l'**ID du calendrier** (dans les mêmes paramètres, section "Intégrer le calendrier") — c'est `primary` si c'est ton calendrier principal, sinon une adresse du type `xxxxx@group.calendar.google.com`.
+
+### Configurer les variables d'environnement
+
+Sur Vercel, ajoute :
+- `GOOGLE_SERVICE_ACCOUNT_EMAIL` : le `client_email` du JSON
+- `GOOGLE_PRIVATE_KEY` : le `private_key` du JSON, collé tel quel (les `\n` restent des caractères littéraux dans le champ Vercel, le code les reconvertit automatiquement en vrais retours à la ligne)
+- `GOOGLE_CALENDAR_ID` : l'ID relevé plus haut
+- `GOOGLE_CALENDAR_TIMEZONE` : `Africa/Porto-Novo` par défaut (déjà la bonne valeur pour le Bénin)
+
+Redéploie, puis teste : dis à l'agent une date et une heure précises
+("Le vendredi 21 août à 15h, ça vous va ?" / "Oui parfait" ou équivalent
+direct comme "Vendredi 21 août 15h ça me va") — un événement doit
+apparaître dans ton Google Calendar, avec un rappel 30 min avant.
+
+
 
 Tout se passe dans `lib/systemPrompt.js`. Modifie le ton, les questions
 de qualification, les règles de style selon l'identité de l'agence.
